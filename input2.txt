@@ -1,0 +1,24 @@
+BEGINTASK<TASK1,NULL>
+MODULE Module5
+	CONST num hello := 6
+	VAR num hi := 5
+	CONST robtarget Target_10 :=[[326.494, 425, 634.740], [0.104, 0, 0.983, 0], [-1, 0, -1, 0], [9E+09, 9E+09, 9E+09, 9E+09, 9E+09, 9E+09]];
+	hi := hi + 6
+	CONST robtarget Target_20 :=[[-474.642, 265, 298.999], [0.087, 0, 0.996, 0], [-1, 0, 0, 0], [9E+09, 9E+09, 9E+09, 9E+09, 9E+09, 9E+09]];
+	PROC MAIN()
+        IF (hi > 1) THEN 
+            TPWrite("Path_Q1_Q2");
+        ELSE
+            TPWrite("Path_Q2_Q1");
+        ENDIF
+	
+	ENDPROC
+	PROC Path_Q1_Q2()
+		TPWrite"Move from Target_10 to Target_20";
+		MoveJ Target_10,v1000,z100,MyTool;
+	ENDPROC
+    PROC Path_Q2_Q1()
+		TPWrite"Move from Target_20 to Target_10";
+	ENDPROC
+ENDMODULE
+ENDTASK
