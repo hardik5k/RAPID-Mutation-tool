@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class WaitSyncTask {
     private static Scanner sc = new Scanner(System.in);
-    public static ArrayList<String> opr = new ArrayList<String>(Arrays.asList("change identity var", "change task"));
+    public static ArrayList<String> opr = new ArrayList<String>(Arrays.asList("change identity point", "change task"));
         
     public static void main(ArrayList<String> program){
         int ln;
@@ -15,7 +15,7 @@ public class WaitSyncTask {
                 return;
             }
             
-            else if (ln >= 1 && ln <= program.size() && program.get(ln - 1).contains("WaitSyncTask")){
+            else if (ln >= 1 && ln <= program.size() && (program.get(ln - 1).contains("WaitSyncTask") || program.get(ln - 1).contains("SyncMoveOn"))){
                 String[] split_line = program.get(ln - 1).replaceAll("[;,]", " ").trim().split("\\s+");
                 int option;
                 option = Util.getOption("Choose from one of the following", opr, sc);

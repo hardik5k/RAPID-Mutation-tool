@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.Scanner;
 
 import Main.Parser;
@@ -8,7 +7,7 @@ import Main.Parser;
 public class Mutation {
 
     static ArrayList<String> unitLevelMutations = new ArrayList<String>(Arrays.asList("Operator Replacement", "Replace Conditionals", "Mutate Assignment Statements", "RAPID Specific mutation", "Go back"));
-    static ArrayList<String> taskLevelMutations = new ArrayList<String>(Arrays.asList("Wait Until/Test and Set", "Set/Wait Do", "Set Do Isignal Do", "Wait Sync Task", "Go back"));
+    static ArrayList<String> taskLevelMutations = new ArrayList<String>(Arrays.asList("Wait Until/Test and Set", "Set/Wait Do", "Set Do Isignal Do", "WaitSyncTask/SyncMoveOn", "Go back"));
     private static Scanner sc = new Scanner(System.in);
     public static void UnitLevel(ArrayList<String> program, Parser p){
 

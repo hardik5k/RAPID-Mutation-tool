@@ -144,40 +144,40 @@ public class Parser {
             Collections.sort(robTargetMap.get(r).getWriteLocations());
         }
 
-        FileOutputStream fos = new FileOutputStream("parser-output-task-" + taskNumber + ".csv", false);
+        // FileOutputStream fos = new FileOutputStream("parser-output-task-" + taskNumber + ".csv", false);
 
-        PrintWriter pw = new PrintWriter(fos);
+        // PrintWriter pw = new PrintWriter(fos);
 
-        for (Map.Entry<String, Variable> entry : varMap.entrySet()) {
-            pw.println(entry.getKey() + "->" + entry.getValue());
-        }
+        // for (Map.Entry<String, Variable> entry : varMap.entrySet()) {
+        //     pw.println(entry.getKey() + "->" + entry.getValue());
+        // }
 
-        for (Map.Entry<String, RobTarget> entry : robTargetMap.entrySet()) {
-            pw.println(entry.getKey() + "->" + entry.getValue());
-        }
+        // for (Map.Entry<String, RobTarget> entry : robTargetMap.entrySet()) {
+        //     pw.println(entry.getKey() + "->" + entry.getValue());
+        // }
 
-        for (ConditionalStatements c : cs) {
-            pw.println(c);
-        }
+        // for (ConditionalStatements c : cs) {
+        //     pw.println(c);
+        // }
 
-        for (MoveInstruction mv : moveInstructionsList) {
-            pw.println(mv);
-        }
+        // for (MoveInstruction mv : moveInstructionsList) {
+        //     pw.println(mv);
+        // }
 
-        for (SyncInstruction s : syncInstructionsList) {
-            pw.println(s);
-        }
+        // for (SyncInstruction s : syncInstructionsList) {
+        //     pw.println(s);
+        // }
 
-        for (WaitInstruction w : waitInstructionsList) {
-            pw.println(w);
-        }
+        // for (WaitInstruction w : waitInstructionsList) {
+        //     pw.println(w);
+        // }
 
-        for (Map.Entry<String,Procedure> entry : procMap.entrySet()){
-            pw.println(entry.getKey() + "->" + entry.getValue());
-        }
+        // for (Map.Entry<String,Procedure> entry : procMap.entrySet()){
+        //     pw.println(entry.getKey() + "->" + entry.getValue());
+        // }
 
-        pw.close();
-        fos.close();
+        // pw.close();
+        // fos.close();
 
     }
 

@@ -1,0 +1,54 @@
+MODULE modRobotStudio
+    CONST robtarget pTurnTablePosROB2:=[[0,4.89842541528954E-16,4],[-6.12303176911189E-17,1,-1.61279309130843E-47,0],[0,0,0,0],[9E9,9E9,9E9,9E9,9E9,9E9]];
+    CONST robtarget pOutFeederPos:=[[200.016009205003,399.937244742038,6.99993896484363],[-2.01362528565985E-22,0.999999999994593,3.28860826072754E-06,-6.12303176907878E-17],[1,0,1,0],[9E9,9E9,9E9,9E9,9E9,9E9]];
+    CONST robtarget pBufferPosROB2:=[[224.500035230801,100.00001157408,166.454416191376],[4.32963728535968E-17,0.707106781186547,0.707106781186548,4.32963728535968E-17],[-1,0,-1,0],[9E9,9E9,9E9,9E9,9E9,9E9]];
+    PERS num nZoffset:=0;
+
+ PROC PickPanel()
+        IF diCellInPickPos=0 THEN
+            MoveJ RelTool(pTurnTablePosROB2,0,0,-100),v1000,fine,tGripper\WObj:=wobjTurnTableROB2;
+            WaitDI diCellInPickPos,1;
+        ELSE
+            MoveJ RelTool(pTurnTablePosROB2,0,0,-100),v1000,z100,tGripper\WObj:=wobjTurnTableROB2;
+        ENDIF
+        SetDO doRobotAtTurnTable,1;
+        MoveL pTurnTablePosROB2,v200,fine,tGripper\WObj:=wobjTurnTableROB2;
+        SetDO doVacuumOn,1;
+        WaitDI diVacuum,1;
+        MoveLDO RelTool(pTurnTablePosROB2,0,0,-100),v200,z10,tGripper\WObj:=wobjTurnTableROB2,doRobotAtTurnTable,0;
+    ENDPROC
+
+    PROC PlacePanelInControlBuffer()
+        MoveJ RelTool(pBufferPosROB2,0,0,-100),v1000,z10,tGripper\WObj:=wobjBuffer;
+        MoveL RelTool(pBufferPosROB2,0,0,nZoffset),v100,fine,tGripper\WObj:=wobjBuffer;
+        IF diBufferFull=1 THEN
+            nZoffset:=0;
+        ELSE
+            nZoffset:=nZoffset-4;
+        ENDIF
+        SetDO doVacuumOn,0;
+        WaitDI diVacuum,0;
+        MoveL RelTool(pBufferPosROB2,0,0,-100),v1000,z10,tGripper\WObj:=wobjBuffer;
+    ENDPROC
+
+    PROC PlacePanelOnOutFeeder()
+        MoveJ RelTool(pOutFeederPos,0,0,-100),v1000,z10,tGripper\WObj:=wobjOutFeeder;
+        MoveL pOutFeederPos,v200,fine,tGripper\WObj:=wobjOutFeeder;
+        SetDO doVacuumOn,0;
+        WaitDI diVacuum,0;
+        MoveL RelTool(pOutFeederPos,0,0,-100),v1000,z10,tGripper\WObj:=wobjOutFeeder;
+    ENDPROC
+
+    PROC main()
+        MoveJ RelTool(pTurnTablePosROB2,0,0,-100),v200,fine,tGripper\WObj:=wobjTurnTableROB2;
+        nZoffset:=0;
+        WHILE TRUE DO
+            PickPanel;
+            IF diPlaceCellInBuffer=1 THEN
+                PlacePanelInControlBuffer;
+            ELSE
+                PlacePanelOnOutFeeder;
+            ENDIF
+        ENDWHILE
+    ENDPROC
+ENDMODULE

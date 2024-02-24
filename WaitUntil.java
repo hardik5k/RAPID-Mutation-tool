@@ -18,11 +18,16 @@ public class WaitUntil {
             else if (ln >= 1 && ln <= program.size() && program.get(ln - 1).contains("WaitUntil")){
                 if (program.get(ln - 1).contains("TestAndSet")){
                     String new_line = handle_wait_untill_test(program, ln);
-                    Util.mutate_line(program, ln, new_line);
+                    if (new_line != ""){
+                        Util.mutate_line(program, ln, new_line);
+                    }
+                    
                 }
                 else{
                     String new_line = handle_wait_untill(program, ln);
-                    Util.mutate_line(program, ln, new_line);
+                    if (new_line != ""){
+                        Util.mutate_line(program, ln, new_line);
+                    }
                 }
             }
             else {
@@ -51,8 +56,7 @@ public class WaitUntil {
                         sc.nextLine();
                         int new_ln = sc.nextInt();
                         Util.moveLine(program, ln - 1, new_ln - 1);
-                        ln = new_ln;
-                        break;
+                        return "";
                 
                     default:
                         System.out.println("Invalid option chosen");
@@ -79,8 +83,7 @@ public class WaitUntil {
                         sc.nextLine();
                         int new_ln = sc.nextInt();
                         Util.moveLine(program, ln - 1, new_ln - 1);
-                        ln = new_ln;
-                        break;
+                        return "";
                 
                     default:
                         System.out.println("Invalid option chosen");

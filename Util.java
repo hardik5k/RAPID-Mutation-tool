@@ -23,11 +23,17 @@ public class Util {
             System.out.println("Invalid indices. Unable to move lines.");
             return;
         }
+        ArrayList<String> mutatedProgram = new ArrayList<String>();
+        for (String s : code){
+            mutatedProgram.add(s);
+        }
 
-        String lineToMove = code.remove(x);
-
+        String lineToMove = mutatedProgram.remove(x);
         // Add the line at index y
-        code.add(y, lineToMove);
+        mutatedProgram.add(y, lineToMove);
+
+        write_mutation(mutatedProgram);
+
     }
 
     public static ArrayList<String> mutate(ArrayList<String>program, int linenumber, String originalOperator, String newOperator){
@@ -39,9 +45,6 @@ public class Util {
         String line = mutatedProgram.get(linenumber - 1);
         mutatedProgram.set(linenumber - 1, line.replace(originalOperator, newOperator));
 
-        for (String x : mutatedProgram){
-            System.out.println(x);
-        }
         write_mutation(mutatedProgram);
         return mutatedProgram;
     }
@@ -54,9 +57,6 @@ public class Util {
 
         mutatedProgram.set(linenumber - 1, new_line);
 
-        for (String x : mutatedProgram){
-            System.out.println(x);
-        }
         write_mutation(mutatedProgram);
         return mutatedProgram;
     }
@@ -66,13 +66,26 @@ public class Util {
     public static void write_mutation(ArrayList<String>mutated_program) {
         FileWriter writer = null;
         try {
-            writer = new FileWriter("mutant_" + i++ + "_" + MTool.inputProgram);
+            String program_name = MTool.inputProgram;
+            if (program_name.contains("/")){
+                String[] split_path = program_name.split("/");
+                program_name = split_path[split_path.length - 1];
+
+            }
+            writer = new FileWriter("mutant_" + i++ + "_" + program_name);
             for(String str: mutated_program) {
                 writer.write(str + System.lineSeparator());
             }
             writer.close();
-        } catch(IOException err)
-        {System.out.println(err);}
+            System.out.println("Mutation successfully generated.");
+            for (String x : mutated_program){
+                System.out.println(x);
+            }
+        } catch(IOException err){
+            System.out.println(err);
+        }
+
+
         
     }
 }

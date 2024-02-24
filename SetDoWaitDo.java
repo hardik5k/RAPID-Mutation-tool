@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class SetDoWaitDo {
     private static Scanner sc = new Scanner(System.in);
-    public static ArrayList<String> opr = new ArrayList<String>(Arrays.asList("Change digital output", "change value", "Swap Set wait", "move statement"));
+    public static ArrayList<String> opr = new ArrayList<String>(Arrays.asList("Change digital output", "change value", "Toggle Set wait", "move statement"));
         
     public static void main(ArrayList<String> program){
         int ln;

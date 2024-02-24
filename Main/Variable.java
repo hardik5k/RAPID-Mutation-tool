@@ -1,7 +1,6 @@
 package Main;
-
 import java.util.ArrayList;
-import java.util.*;
+
 
 
 public class Variable {

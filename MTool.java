@@ -1,18 +1,8 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Scanner;
-import java.util.function.BiFunction;
-import java.util.function.DoubleBinaryOperator;
-
-import javax.swing.plaf.synth.SynthEditorPaneUI;
-
-import Main.ConditionalStatements;
 import Main.Parser;
 
 
@@ -25,8 +15,7 @@ public class MTool {
 
         Scanner sc = new Scanner(System.in);
         Parser p = new Parser();
-        
-        inputProgram = "WaitSynctask.txt";
+        inputProgram = args[0];
         Integer lineNumber = 0;
         
         FileReader fr = new FileReader(inputProgram); 
@@ -50,9 +39,8 @@ public class MTool {
         do {
             System.out.println("Please choose from one of the following mutation tasks:");
             System.out.println("1. Unit level");
-            System.out.println("2. Integration level");
-            System.out.println("3. Task level");
-            System.out.println("4. Exit");
+            System.out.println("2. Task level");
+            System.out.println("3. Exit");
 
             option = sc.nextInt();
 
@@ -60,20 +48,17 @@ public class MTool {
             case 1 :
                 Mutation.UnitLevel(program, p);
                 break;
-            // case 2 :
-            //     Mutation.IntegrationLevel();
-            //     break;
-            case 3 :
+            case 2 :
                 Mutation.TaskLevel(program, p);
                 break;
-            case 4 :
+            case 3 :
                 System.out.println("Thank you for using this tool");
                 break;
             default:
                 System.out.println("Invalid option chosen");
 
         }
-    } while (option != 4);
+    } while (option != 3);
     fr.close();
     sc.close();
 }
